@@ -34,7 +34,13 @@ namespace WebScraping
         private static int ParallelTaskCount;
         private static async Task Main()
         {
-            Console.WriteLine($"Created by ~Erdem Kalay~");
+            Console.WriteLine(@"  
+                           _                                 _                       _____   _    
+   __ _  ___   ___   __ _| | ___   ___  ___ _ __ __ _ _ __ (_)_ __   __ _          | ____| | | __
+  / _` |/ _ \ / _ \ / _` | |/ _ \ / __|/ __| '__/ _` | '_ \| | '_ \ / _` |  _____  |  _|   | |/ /
+ | (_| | (_) | (_) | (_| | |  __/ \__ \ (__| | | (_| | |_) | | | | | (_| | |_____| | |___ _|   < 
+  \__, |\___/ \___/ \__, |_|\___| |___/\___|_|  \__,_| .__/|_|_| |_|\__, |         |_____(_)_|\_\
+  |___/             |___/                            |_|            |___/                        ");
             await StartScraping();
         }
 
@@ -237,7 +243,7 @@ namespace WebScraping
             var args = ExcelParamsQueue.Dequeue();
             using var workbook = new XLWorkbook(ResultPath);
             IXLWorksheet worksheet;
-            
+
             try
             {
                 worksheet = workbook.Worksheet(args.WorksheetPos);
@@ -268,7 +274,7 @@ namespace WebScraping
                     Console.WriteLine($"YAZILAMADI {seller.Source}");
                     continue;
                 }
-                worksheet.Cell(row, 7 + i).FormulaA1 = $"=HYPERLINK(\"{seller.SellerLink}\",\"{seller.PriceText}\")";
+                worksheet.Cell(row, 7 + i).FormulaA1 = $"=HYPERLINK(\"{seller.SellerLink}\",\"{seller.Price}\")";
 
                 // worksheet.Cell(row, 7 + i).Value = $"{seller.PriceText}";
                 worksheet.Column(7).Width = 10;
